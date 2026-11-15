@@ -428,9 +428,12 @@ const APP_STATE = {
   roomId: "nea-gamers-2026",
   lanIp: "",
   publicTunnelUrl: "",
-  customBaseUrl: "",
+  customBaseUrl: "https://emilio735.github.io/Presentacion-Gamers/",
   shortUrlDisplay: "",
   fullJoinUrl: "",
+  clientId: "c_" + Math.random().toString(36).substring(2, 10),
+  mqttClients: [],
+  cloudConnected: false,
   firebaseConnected: false,
   firebaseDb: null,
   firebaseRoomRef: null,
@@ -462,6 +465,11 @@ function ensurePlainObject(val) {
     return {};
   }
   return val;
+}
+
+function nextSlideSeq() {
+  const cur = Number(APP_STATE.room.slideSeq || 0);
+  return Math.max(cur + 1, Date.now());
 }
 
 const SURVEY_TIMER_DURATION_SEC = 15;
@@ -582,6 +590,7 @@ function initApp() {
 
   // Inicializar canales de sincronización
   initBroadcastChannel();
+  initCloudRealtimeSync();
   initFirebaseFromSavedConfig();
   initPhpPollingSync();
 
@@ -732,8 +741,258 @@ function getSyncPhpUrl() {
 }
 
 function initPhpPollingSync() {
+  if (window.location.hostname.includes("github.io")) {
+    return;
+  }
   fetchPhpState();
   setInterval(fetchPhpState, 650);
+}
+
+/* =========================================================
+   3B. SINCRONIZACIÓN EN LA NUBE EN TIEMPO REAL (GitHub Pages + Móviles)
+   ========================================================= */
+function getCloudTopics() {
+  const cleanRoom = APP_STATE.roomId || "nea-gamers-2026";
+  return {
+    stateTopic: `agy/presentaciongamers/v2/${cleanRoom}/state`,
+    actionTopic: `agy/presentaciongamers/v2/${cleanRoom}/action`,
+    ntfyTopic: `agy_pg_v2_${cleanRoom}`
+  };
+}
+
+function ensureMqttLibraryLoaded(callback) {
+  if (typeof window.mqtt !== "undefined") {
+    callback();
+    return;
+  }
+  const script = document.createElement("script");
+  script.src = "https://unpkg.com/mqtt@5.10.1/dist/mqtt.min.js";
+  script.onload = () => callback();
+  script.onerror = () => {
+    const fallback = document.createElement("script");
+    fallback.src = "https://cdnjs.cloudflare.com/ajax/libs/mqtt/5.10.1/mqtt.min.js";
+    fallback.onload = () => callback();
+    document.head.appendChild(fallback);
+  };
+  document.head.appendChild(script);
+}
+
+function initCloudRealtimeSync() {
+  const { stateTopic, actionTopic, ntfyTopic } = getCloudTopics();
+
+  // 1. Conectar vía WebSockets seguros (WSS) a brokers MQTT públicos para sincronización instantánea (< 50ms)
+  ensureMqttLibraryLoaded(() => {
+    if (typeof window.mqtt === "undefined") return;
+    const brokerUrls = [
+      "wss://broker.emqx.io:8084/mqtt",
+      "wss://broker.hivemq.com:8884/mqtt"
+    ];
+
+    brokerUrls.forEach((url) => {
+      try {
+        const client = window.mqtt.connect(url, {
+          clientId: "agy_" + APP_STATE.clientId + "_" + Math.random().toString(36).substring(2, 6),
+          clean: true,
+          connectTimeout: 5000,
+          reconnectPeriod: 2000
+        });
+
+        client.on("connect", () => {
+          APP_STATE.cloudConnected = true;
+          updateSyncBadge();
+          client.subscribe([stateTopic, actionTopic], { qos: 0 }, () => {
+            if (APP_STATE.isQrGuest) {
+              // Al entrar desde el celular, pedir inmediatamente el estado actual al presentador
+              client.publish(
+                actionTopic,
+                JSON.stringify({
+                  type: "REQUEST_STATE",
+                  senderId: APP_STATE.clientId,
+                  timestamp: Date.now()
+                }),
+                { qos: 0, retain: false }
+              );
+              // Si el participante ya tenía usuario registrado, anunciarlo
+              if (APP_STATE.participantUser) {
+                client.publish(
+                  actionTopic,
+                  JSON.stringify({
+                    type: "PARTICIPANT_ACTION",
+                    senderId: APP_STATE.clientId,
+                    payload: {
+                      action: "join_user",
+                      user: APP_STATE.participantUser
+                    }
+                  }),
+                  { qos: 0, retain: false }
+                );
+              }
+            } else {
+              // El presentador publica su estado actual al conectarse
+              publishCloudState();
+            }
+          });
+        });
+
+        client.on("message", (topic, messageBuffer) => {
+          try {
+            const packet = JSON.parse(messageBuffer.toString());
+            if (!packet || packet.senderId === APP_STATE.clientId) return;
+            handleCloudPacket(packet);
+          } catch (e) { }
+        });
+
+        APP_STATE.mqttClients.push(client);
+      } catch (e) { }
+    });
+  });
+
+  // 2. Canal HTTPS SSE de respaldo (ntfy.sh puerto 443) por si la red bloquea puertos WebSocket
+  if ("EventSource" in window) {
+    try {
+      const es = new EventSource(`https://ntfy.sh/${encodeURIComponent(ntfyTopic)}/sse`);
+      es.onmessage = (ev) => {
+        try {
+          const outer = JSON.parse(ev.data);
+          if (!outer || !outer.message) return;
+          const packet = JSON.parse(outer.message);
+          if (!packet || packet.senderId === APP_STATE.clientId) return;
+          handleCloudPacket(packet);
+        } catch (e) { }
+      };
+    } catch (e) { }
+  }
+
+  // Si es el presentador (!isQrGuest), emitir latido de sincronización cada 2.5s sobre MQTT para mantener a todos los celulares al día
+  if (!APP_STATE.isQrGuest) {
+    setInterval(() => {
+      publishCloudState(false);
+    }, 2500);
+  }
+}
+
+function handleCloudPacket(packet) {
+  if (packet.type === "STATE_SYNC" && packet.state) {
+    if (packet.serverNow) {
+      APP_STATE.serverTimeOffset = Number(packet.serverNow) - Date.now();
+    }
+    mergeRoomState(packet.state, true);
+    APP_STATE.initialServerSyncDone = true;
+  } else if (packet.type === "REQUEST_STATE") {
+    if (!APP_STATE.isQrGuest) {
+      publishCloudState(false);
+    }
+  } else if (packet.type === "PARTICIPANT_ACTION" && packet.payload) {
+    handleIncomingCloudAction(packet.payload);
+  }
+}
+
+function handleIncomingCloudAction(payload) {
+  if (!payload || !payload.action) return;
+  APP_STATE.room.users = ensurePlainObject(APP_STATE.room.users);
+  APP_STATE.room.responses = ensurePlainObject(APP_STATE.room.responses);
+
+  let changed = false;
+
+  if (payload.action === "join_user" && payload.user && payload.user.id) {
+    const uid = payload.user.id;
+    const existing = APP_STATE.room.users[uid];
+    const existingScore = existing ? Number(existing.score || 0) : 0;
+    APP_STATE.room.users[uid] = {
+      ...payload.user,
+      score: Math.max(existingScore, Number(payload.user.score || 0)),
+      lastSeen: Date.now()
+    };
+    changed = true;
+  } else if (
+    payload.action === "submit_response" &&
+    payload.slideId &&
+    payload.userId &&
+    payload.response
+  ) {
+    const { slideId, userId, response, scoreDelta } = payload;
+    APP_STATE.room.responses[slideId] = ensurePlainObject(APP_STATE.room.responses[slideId]);
+    const alreadyHad = APP_STATE.room.responses[slideId][userId] !== undefined;
+    APP_STATE.room.responses[slideId][userId] = response;
+
+    if (!APP_STATE.room.users[userId]) {
+      APP_STATE.room.users[userId] = {
+        id: userId,
+        name: response.userName || "Participante",
+        score: 0,
+        answersCount: 0,
+        joinedAt: Date.now()
+      };
+    }
+
+    if (!alreadyHad && scoreDelta) {
+      APP_STATE.room.users[userId].score =
+        Number(APP_STATE.room.users[userId].score || 0) + Number(scoreDelta || 0);
+      APP_STATE.room.users[userId].answersCount =
+        Number(APP_STATE.room.users[userId].answersCount || 0) + 1;
+    }
+    changed = true;
+  }
+
+  if (changed) {
+    APP_STATE.room.updatedAt = Date.now();
+    if (!APP_STATE.isQrGuest) {
+      if (!window.location.hostname.includes("github.io")) {
+        postPhpAction(payload);
+      }
+      publishCloudState(false);
+    }
+    renderAll();
+  }
+}
+
+function publishCloudState(alsoSendNtfy = true) {
+  if (APP_STATE.isQrGuest) return;
+  const { stateTopic, ntfyTopic } = getCloudTopics();
+  const packetStr = JSON.stringify({
+    type: "STATE_SYNC",
+    senderId: APP_STATE.clientId,
+    serverNow: getEstimatedServerNow(),
+    state: APP_STATE.room
+  });
+
+  APP_STATE.mqttClients.forEach((client) => {
+    try {
+      if (client && client.connected) {
+        client.publish(stateTopic, packetStr, { qos: 0, retain: true });
+      }
+    } catch (e) { }
+  });
+
+  if (alsoSendNtfy) {
+    fetch(`https://ntfy.sh/${encodeURIComponent(ntfyTopic)}`, {
+      method: "POST",
+      body: packetStr
+    }).catch(() => { });
+  }
+}
+
+function publishCloudAction(actionPayload) {
+  if (!actionPayload) return;
+  const { actionTopic, ntfyTopic } = getCloudTopics();
+  const packetStr = JSON.stringify({
+    type: "PARTICIPANT_ACTION",
+    senderId: APP_STATE.clientId,
+    payload: actionPayload
+  });
+
+  APP_STATE.mqttClients.forEach((client) => {
+    try {
+      if (client && client.connected) {
+        client.publish(actionTopic, packetStr, { qos: 0, retain: false });
+      }
+    } catch (e) { }
+  });
+
+  fetch(`https://ntfy.sh/${encodeURIComponent(ntfyTopic)}`, {
+    method: "POST",
+    body: packetStr
+  }).catch(() => { });
 }
 
 async function fetchPhpState() {
@@ -952,10 +1211,16 @@ function mergeRoomState(incoming, fromServer = false) {
       ? Boolean(APP_STATE.room.revealAnswers)
       : Boolean(incoming.revealAnswers),
     openedSurveys: nextOpened,
-    users: ensurePlainObject(incoming.users),
-    responses: ensurePlainObject(incoming.responses),
+    users: { ...ensurePlainObject(APP_STATE.room.users), ...ensurePlainObject(incoming.users) },
+    responses: { ...ensurePlainObject(APP_STATE.room.responses), ...ensurePlainObject(incoming.responses) },
     updatedAt: Math.max(curTime, incTime) || Date.now()
   };
+
+  if (incoming.users && Object.keys(ensurePlainObject(incoming.users)).length === 0 && incSeq > curSeq && Number(incoming.currentSlide ?? 0) === 0) {
+    // Si fue un reinicio de sala (reset_room), limpiar usuarios y respuestas
+    APP_STATE.room.users = {};
+    APP_STATE.room.responses = {};
+  }
 
   // Actualizar puntaje del participante local si existe en la sala
   if (APP_STATE.participantUser && APP_STATE.room.users[APP_STATE.participantUser.id]) {
@@ -969,10 +1234,22 @@ function commitStateChange(actionPayload = null) {
   APP_STATE.room.updatedAt = Date.now();
   broadcastLocalState();
   pushToFirebase();
-  if (actionPayload) {
-    postPhpAction(actionPayload);
+  if (APP_STATE.isQrGuest) {
+    if (actionPayload) {
+      publishCloudAction(actionPayload);
+      if (!window.location.hostname.includes("github.io")) {
+        postPhpAction(actionPayload);
+      }
+    }
   } else {
-    postPhpAction({ action: "full_sync", state: APP_STATE.room });
+    publishCloudState(true);
+    if (!window.location.hostname.includes("github.io")) {
+      if (actionPayload) {
+        postPhpAction(actionPayload);
+      } else {
+        postPhpAction({ action: "full_sync", state: APP_STATE.room });
+      }
+    }
   }
   renderAll();
 }
@@ -1116,7 +1393,7 @@ window.addEventListener("click", (e) => {
 function prepareSlideTransitionPayload(nextIndex, prevIndex = null) {
   const targetSlide = SLIDES_DATA[nextIndex];
   const prevSlide = prevIndex !== null ? SLIDES_DATA[prevIndex] : null;
-  APP_STATE.room.slideSeq = (Number(APP_STATE.room.slideSeq) || 0) + 1;
+  APP_STATE.room.slideSeq = nextSlideSeq();
   APP_STATE.lastLocalSlideChangeAt = Date.now();
   const payload = {
     action: "set_slide",
@@ -1169,7 +1446,7 @@ function goToSlide(index) {
 
 function toggleRevealAnswers() {
   APP_STATE.room.revealAnswers = !APP_STATE.room.revealAnswers;
-  APP_STATE.room.slideSeq = (Number(APP_STATE.room.slideSeq) || 0) + 1;
+  APP_STATE.room.slideSeq = nextSlideSeq();
   APP_STATE.lastLocalSlideChangeAt = Date.now();
   commitStateChange({
     action: "set_slide",
@@ -1458,7 +1735,7 @@ function simulateClassActivity() {
 
 function resetRoomData() {
   if (!confirm("¿Deseás reiniciar todas las respuestas y puntajes de la sala actual?")) return;
-  const nextSeq = (Number(APP_STATE.room.slideSeq) || 0) + 1;
+  const nextSeq = nextSlideSeq();
   APP_STATE.lastLocalSlideChangeAt = Date.now();
   APP_STATE.slide2SurveyOpened = false;
   APP_STATE.slide2SurveyAnimating = false;
@@ -3198,7 +3475,7 @@ function triggerSlide2RetroSurvey() {
   APP_STATE.slide2SurveyAnimating = true;
   APP_STATE.room.openedSurveys = ensurePlainObject(APP_STATE.room.openedSurveys);
   APP_STATE.room.openedSurveys["slide-2"] = getEstimatedServerNow();
-  APP_STATE.room.slideSeq = (Number(APP_STATE.room.slideSeq) || 0) + 1;
+  APP_STATE.room.slideSeq = nextSlideSeq();
   APP_STATE.lastLocalSlideChangeAt = Date.now();
   playRetroArcadeSound();
   commitStateChange({
@@ -3245,7 +3522,7 @@ function triggerSlide4NextLevelSurvey(slideId = "slide-3") {
   APP_STATE.openedSurveys[slideId + "_anim"] = true;
   APP_STATE.room.openedSurveys = ensurePlainObject(APP_STATE.room.openedSurveys);
   APP_STATE.room.openedSurveys[slideId] = getEstimatedServerNow();
-  APP_STATE.room.slideSeq = (Number(APP_STATE.room.slideSeq) || 0) + 1;
+  APP_STATE.room.slideSeq = nextSlideSeq();
   APP_STATE.lastLocalSlideChangeAt = Date.now();
   playNextLevelSound();
   commitStateChange({
@@ -3313,7 +3590,7 @@ function triggerSlide5FlipCoinsSurvey(slideId = "slide-4") {
   APP_STATE.openedSurveys[slideId + "_anim"] = true;
   APP_STATE.room.openedSurveys = ensurePlainObject(APP_STATE.room.openedSurveys);
   APP_STATE.room.openedSurveys[slideId] = getEstimatedServerNow();
-  APP_STATE.room.slideSeq = (Number(APP_STATE.room.slideSeq) || 0) + 1;
+  APP_STATE.room.slideSeq = nextSlideSeq();
   APP_STATE.lastLocalSlideChangeAt = Date.now();
   playCoinsBurstSound();
   commitStateChange({
@@ -3370,7 +3647,7 @@ function triggerSlide13Modern3dSurvey(slideId = "slide-7") {
   APP_STATE.openedSurveys[slideId + "_anim"] = true;
   APP_STATE.room.openedSurveys = ensurePlainObject(APP_STATE.room.openedSurveys);
   APP_STATE.room.openedSurveys[slideId] = getEstimatedServerNow();
-  APP_STATE.room.slideSeq = (Number(APP_STATE.room.slideSeq) || 0) + 1;
+  APP_STATE.room.slideSeq = nextSlideSeq();
   APP_STATE.lastLocalSlideChangeAt = Date.now();
   playModern3dGameSound();
   commitStateChange({
@@ -3456,7 +3733,7 @@ function triggerSlide14Orbital3dSurvey(slideId = "slide-8") {
   APP_STATE.openedSurveys[slideId + "_anim"] = true;
   APP_STATE.room.openedSurveys = ensurePlainObject(APP_STATE.room.openedSurveys);
   APP_STATE.room.openedSurveys[slideId] = getEstimatedServerNow();
-  APP_STATE.room.slideSeq = (Number(APP_STATE.room.slideSeq) || 0) + 1;
+  APP_STATE.room.slideSeq = nextSlideSeq();
   APP_STATE.lastLocalSlideChangeAt = Date.now();
   playModern3dOrbitalDropSound();
   commitStateChange({
@@ -3543,7 +3820,7 @@ function triggerSlide8PokeballSurvey(slideId = "slide-5") {
   APP_STATE.openedSurveys[slideId + "_anim"] = true;
   APP_STATE.room.openedSurveys = ensurePlainObject(APP_STATE.room.openedSurveys);
   APP_STATE.room.openedSurveys[slideId] = getEstimatedServerNow();
-  APP_STATE.room.slideSeq = (Number(APP_STATE.room.slideSeq) || 0) + 1;
+  APP_STATE.room.slideSeq = nextSlideSeq();
   APP_STATE.lastLocalSlideChangeAt = Date.now();
   playPokeball3dSound();
   commitStateChange({
@@ -3633,7 +3910,7 @@ function triggerSlide17FinalResults(slideId = "slide-10") {
   APP_STATE.openedSurveys[slideId + "_anim"] = true;
   APP_STATE.room.openedSurveys = ensurePlainObject(APP_STATE.room.openedSurveys);
   APP_STATE.room.openedSurveys[slideId] = Date.now();
-  APP_STATE.room.slideSeq = (Number(APP_STATE.room.slideSeq) || 0) + 1;
+  APP_STATE.room.slideSeq = nextSlideSeq();
   APP_STATE.lastLocalSlideChangeAt = Date.now();
   playFinalLeaderboardSound();
   commitStateChange({
