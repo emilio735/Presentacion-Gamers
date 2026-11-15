@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Investigación Antropológica: La Subcultura Gamer en el NEA — Presentación Interactiva</title>
+  <link rel="stylesheet" href="styles.css?v=20261115a" />
+  <!-- Generador automático de código QR (QRCode.js) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <!-- Firebase SDK (App + Realtime Database) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+</head>
+<body>
+  <!-- Botón de Menú flotante presente en todas las diapositivas -->
+  <div class="floating-menu-container" id="floating-view-menu">
+    <button
+      type="button"
+      class="floating-menu-btn"
+      id="floating-menu-trigger"
+      onclick="toggleViewMenu(event)"
+      aria-expanded="false"
+      title="Menú de vistas"
+    >
+      <span class="hamburger-icon">☰</span>
+      <span>Menú</span>
+    </button>
+    <div class="floating-menu-dropdown" id="floating-menu-dropdown">
+      <button
+        type="button"
+        class="floating-menu-item"
+        id="menu-opt-presenter"
+        onclick="selectRoleFromMenu('presenter')"
+      >
+        🖥️ Vista de Presentador
+      </button>
+      <button
+        type="button"
+        class="floating-menu-item"
+        id="menu-opt-participant"
+        onclick="selectRoleFromMenu('participant')"
+      >
+        📱 Vista de Participante
+      </button>
+    </div>
+  </div>
+
+  <!-- Barra Superior de Navegación (Oculta en todas las diapositivas de Vista Participante) -->
+  <header class="top-navbar" id="top-navbar">
+    <div class="brand-group">
+      <span class="brand-badge">ISCMLL · 2026</span>
+      <div>
+        <span class="brand-title">La Subcultura Gamer en el NEA</span>
+        <span class="brand-subtitle">Cultura y Comunicación Contemporánea · Lic. Beatriz Cabrera</span>
+      </div>
+    </div>
+
+    <div class="nav-controls">
+      <div class="status-pill" title="Estado de sincronización en tiempo real">
+        <span class="status-dot" id="sync-status-dot"></span>
+        <span id="sync-status-text">Sincronización en Vivo Activa</span>
+      </div>
+
+      <div class="mode-switcher" role="tablist" aria-label="Selector de vista">
+        <button
+          type="button"
+          class="mode-btn active"
+          id="mode-btn-presenter"
+          onclick="switchRole('presenter')"
+        >
+          🖥️ Vista Presentador
+        </button>
+        <button
+          type="button"
+          class="mode-btn"
+          id="mode-btn-participant"
+          onclick="switchRole('participant')"
+        >
+          📱 Vista Participante (Móvil)
+        </button>
+      </div>
+
+      <button type="button" class="btn btn-sm" onclick="openFirebaseModal()">
+        🔥 Firebase / QR URL
+      </button>
+    </div>
+  </header>
+
+  <!-- Contenedor Principal -->
+  <main class="workspace-container">
+    <!-- VISTA 1: PRESENTADOR (Hoja estilo PDF + Panel de Control y Estadísticas) -->
+    <section id="presenter-view" class="presenter-grid">
+      <article id="pdf-slide-canvas" class="pdf-sheet" aria-live="polite">
+        <!-- Renderizado dinámico por app.js -->
+      </article>
+
+      <aside id="presenter-sidebar" class="presenter-sidebar">
+        <!-- Panel de control, KPIs y Ranking en vivo -->
+      </aside>
+    </section>
+
+    <!-- VISTA 2: PARTICIPANTE (Adaptada para Móviles y QR) -->
+    <section id="participant-view" style="display: none;">
+      <!-- Renderizado dinámico por app.js -->
+    </section>
+  </main>
+
+  <!-- Modal de Configuración de Firebase y Enlace de Red Local -->
+  <div class="modal-backdrop" id="firebase-modal" role="dialog" aria-modal="true">
+    <div class="modal-dialog">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.85rem;">
+        <h3 style="color:var(--pdf-navy);font-size:1.15rem;">
+          ⚙️ Configuración de Firebase y Acceso QR Móvil
+        </h3>
+        <button type="button" class="btn btn-sm" onclick="closeFirebaseModal()">✕</button>
+      </div>
+
+      <form onsubmit="saveNetworkAndFirebaseSettings(event)">
+        <div style="margin-bottom:1rem;">
+          <label style="display:block;font-weight:700;font-size:0.86rem;color:var(--pdf-navy);margin-bottom:0.3rem;">
+            URL Base para el Código QR (Red Wi-Fi Local o Dominio Público):
+          </label>
+          <input
+            type="url"
+            id="custom-base-url-input"
+            class="input-field"
+            style="margin-bottom:0.3rem;"
+            placeholder="http://192.168.1.100/Presentaciongamers/"
+          />
+          <small style="color:var(--pdf-text-muted);font-size:0.78rem;display:block;">
+            Si proyectás desde WAMP en una red Wi-Fi, el sistema detecta automáticamente la IP LAN local para que los celulares puedan escanear el QR directamente.
+          </small>
+        </div>
+
+        <div style="margin-bottom:1rem;">
+          <label style="display:block;font-weight:700;font-size:0.86rem;color:var(--pdf-navy);margin-bottom:0.3rem;">
+            Configuración de Firebase Realtime Database (JSON opcional):
+          </label>
+          <textarea
+            id="firebase-config-textarea"
+            class="input-field"
+            rows="6"
+            style="font-family:monospace;font-size:0.82rem;"
+            placeholder='{
+  "apiKey": "TU_API_KEY",
+  "authDomain": "tu-proyecto.firebaseapp.com",
+  "databaseURL": "https://tu-proyecto-default-rtdb.firebaseio.com",
+  "projectId": "tu-proyecto"
+}'
+          ></textarea>
+          <small style="color:var(--pdf-text-muted);font-size:0.78rem;display:block;">
+            La presentación cuenta con sincronización híbrida en tiempo real: usa <strong>Firebase Realtime Database</strong> cuando ingresás tus credenciales, y además sincroniza instantáneamente mediante <strong>WAMP Server (sync.php)</strong> y <strong>BroadcastChannel</strong> sin requerir configuración previa.
+          </small>
+        </div>
+
+        <div style="display:flex;justify-content:flex-end;gap:0.6rem;">
+          <button type="button" class="btn" onclick="closeFirebaseModal()">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar y Actualizar QR</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js?v=20261115d"></script>
+</body>
+</html>
+
