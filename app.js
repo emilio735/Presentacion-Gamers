@@ -3203,9 +3203,11 @@ function renderParticipantMobileView() {
     const isSlide14 = slide.id === "slide-8";
     const hasManualRevealBtn = isSlide4 || isSlide5 || isSlide8 || isSlide13 || isSlide14;
 
-    const showRightSurvey = hasManualRevealBtn
-      ? Boolean(APP_STATE.openedSurveys[slide.id] || APP_STATE.room.openedSurveys?.[slide.id])
-      : true;
+    const showRightSurvey = slide.videoCard
+      ? Boolean(canControl)
+      : hasManualRevealBtn
+        ? Boolean(APP_STATE.openedSurveys[slide.id] || APP_STATE.room.openedSurveys?.[slide.id])
+        : true;
 
     let rightAnimClass = "";
     if (APP_STATE.openedSurveys[slide.id + "_anim"]) {
