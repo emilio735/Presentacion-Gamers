@@ -576,15 +576,16 @@ function initApp() {
   if (roleParam === "participant") {
     APP_STATE.role = "participant";
     APP_STATE.isQrGuest = true;
-  }
-
-  // Cargar usuario participante guardado en sesión móvil
-  const savedUser = localStorage.getItem("agy_gamer_participant_" + APP_STATE.roomId);
-  if (savedUser) {
-    try {
-      APP_STATE.participantUser = JSON.parse(savedUser);
-    } catch (e) {
-      APP_STATE.participantUser = null;
+    // Al ingresar escaneando el QR, pedir siempre que se registre con su nombre antes de pasar a la Diapositiva 1
+    APP_STATE.participantUser = null;
+  } else {
+    const savedUser = localStorage.getItem("agy_gamer_participant_" + APP_STATE.roomId);
+    if (savedUser) {
+      try {
+        APP_STATE.participantUser = JSON.parse(savedUser);
+      } catch (e) {
+        APP_STATE.participantUser = null;
+      }
     }
   }
 
@@ -2713,9 +2714,12 @@ function renderParticipantMobileView() {
   const rawSlideIndex = APP_STATE.room.currentSlide || 0;
   const canControl = !APP_STATE.isQrGuest;
 
-  // Si un participante en celular escaneó el QR en la Diapositiva 0 y aún no ingresó su nombre, mostrar registro;
-  // una vez registrado (al escanear el QR e ingresar), pasa automáticamente a ver la Diapositiva 1 (Portada Institucional).
-  if (!canControl && rawSlideIndex === 0 && !APP_STATE.participantUser) {
+  // Si un participante en celular escaneó el QR y aún no ingresó su nombre en esta sesión, mostrar siempre el registro primero;
+  // una vez registrado con su nombre, pasa automáticamente a la Diapositiva 1 (Portada Institucional).
+  if (!canControl && !APP_STATE.participantUser) {
+    if (document.getElementById("participant-name-input")) {
+      return;
+    }
     container.innerHTML = `
       <div class="participant-wrapper">
         <div class="mobile-card">
@@ -2724,12 +2728,12 @@ function renderParticipantMobileView() {
               <div style="font-weight:800;font-size:1rem;">Subcultura Gamer en el NEA</div>
               <div style="font-size:0.76rem;opacity:0.85;">Instituto Superior Carmen Molina de Llano</div>
             </div>
-            <span class="mobile-user-score">Sala Activa</span>
+            <span class="mobile-user-score">Registro de Participante</span>
           </div>
           <div class="mobile-body">
             <h3 style="color:var(--pdf-navy);margin-bottom:0.5rem;">¡Bienvenido/a a la presentación interactiva!</h3>
             <p style="font-size:0.9rem;color:var(--pdf-text-muted);margin-bottom:1rem;">
-              Ingresá tu nombre o apodo gamer para pasar a la Diapositiva 1 y sumar puntos respondiendo en tiempo real desde tu móvil.
+              Ingresá tu nombre o apodo gamer para registrarte y pasar a la Diapositiva 1.
             </p>
             <form onsubmit="registerParticipant(event)">
               <input
@@ -2739,9 +2743,10 @@ function renderParticipantMobileView() {
                 placeholder="Tu nombre o apodo (ej. Matías, Sofi_NEA)"
                 required
                 maxlength="28"
+                autocomplete="off"
               />
               <button type="submit" class="btn btn-primary" style="width:100%;padding:0.8rem;">
-                Ingresar e Ir a Diapositiva 1 →
+                Registrarme e Ir a Diapositiva 1 →
               </button>
             </form>
           </div>
