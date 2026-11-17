@@ -45,8 +45,36 @@ const SLIDES_DATA = [
     interaction: null
   },
   {
-    id: "slide-2",
+    id: "slide-gamer-profile",
     number: 2,
+    shortTitle: "¿Qué hace un Gamer y cómo es?",
+    type: "gamer-profile",
+    sectionTitle: "¿QUÉ HACE UN GAMER Y CÓMO ES?",
+    leftImage: "gamer_mujer.jpg",
+    rightImage: "gamer_hombre.jpg",
+    blocks: [
+      {
+        heading: "¿Qué hace un gamer y cómo es?",
+        text: "_Un gamer es una persona que juega videojuegos habitualmente. Puede ser de cualquier edad o género, y no necesariamente pasa todo el tiempo encerrado jugando, ya que tiene distintas actividades y responsabilidades"
+      },
+      {
+        heading: "¿Cuánto tiempo le dedica?",
+        items: [
+          { lead: "Casual:", text: "Juega entre 1 y 3 horas al día, en sus ratos libres." },
+          { lead: "Apasionado:", text: "Dedica entre 3 y 5 horas diarias a los videojuegos." },
+          { lead: "Profesional o streamer:", text: "Puede jugar entre 6 y 10 horas al día, entrenando, compitiendo o creando contenido." }
+        ]
+      },
+      {
+        heading: "¿Viven de eso?",
+        text: "Sí, se puede vivir de los videojuegos, pero son pocos los que lo consiguen. Para ganar dinero pueden trabajar en equipos profesionales, hacer streaming, conseguir patrocinadores o ganar premios en torneos. Pero la gran mayoría de estos lo hacen por hobbies y pasar el rato."
+      }
+    ],
+    interaction: null
+  },
+  {
+    id: "slide-2",
+    number: 3,
     shortTitle: "Índice e Introducción",
     type: "content",
     sectionTitle: "ÍNDICE Y 1. INTRODUCCIÓN",
@@ -63,8 +91,8 @@ const SLIDES_DATA = [
       { text: "3. CONCLUSIÓN · 4. BIBLIOGRAFÍA · 5. ANEXOS", indent: false }
     ],
     paragraphs: [
-      "El presente trabajo integrador de investigación antropológica aborda el estudio integral de la subcultura gamer dentro del marco sociocultural de las provincias del Nordeste Argentino (NEA). Los videojuegos han dejado de concebirse como una mera actividad de ocio individual aislada para transformarse en un escenario complejo de interacción social, construcción de identidades y sentido de pertenencia transgeneracional.",
-      "Partiendo de la evolución histórica del colectivo gamer —desde las salas recreativas en los años 70 y las consolas hogareñas en los 80, hasta la masificación de las redes globales de juego y los eSports contemporáneos—, este trabajo explora exhaustivamente cómo los jóvenes de nuestra región reconfiguran estas dinámicas a través del marco teórico de la Antropología Cultural y la Comunicación Contemporánea."
+      "Este trabajo integrador de investigación antropológica estudia a fondo la cultura gamer dentro de la sociedad de las provincias del Nordeste Argentino (NEA). Los videojuegos dejaron de verse como un simple pasatiempo individual y aislado, para convertirse en un espacio complejo donde la gente socializa, construye su identidad y siente que pertenece a un grupo que une a distintas generaciones.",
+      "Partiendo de la historia del grupo gamer —desde los salones de fichines en los años 70 y las consolas en las casas en los 80, hasta la llegada masiva de internet para jugar con todo el mundo y los deportes electrónicos (eSports) actuales—, este trabajo analiza en detalle cómo los jóvenes de nuestra región adaptan estas costumbres a su propia realidad, usando las ideas de la Antropología Cultural y la Comunicación Contemporánea."
     ],
     interaction: {
       id: "q-intro-poll",
@@ -82,7 +110,7 @@ const SLIDES_DATA = [
   },
   {
     id: "slide-2-results",
-    number: 3,
+    number: 4,
     shortTitle: "Resultados Encuesta Inicial",
     type: "poll-results",
     sourceSlideId: "slide-2",
@@ -92,26 +120,26 @@ const SLIDES_DATA = [
   },
   {
     id: "slide-3",
-    number: 4,
+    number: 5,
     shortTitle: "2.1 Evolución Gamer",
     type: "content",
     sectionTitle: "2. DESARROLLO",
     subSectionTitle: "2.1. Investigación Antropológica de la Subcultura Gamer en el NEA",
     paragraphs: [
-      "Para investigar la subcultura gamer en las provincias del NEA desde el método antropológico, se analiza su proceso cultural a través de su trayectoria y evolución tecnológica:"
+      "Para investigar la cultura gamer en las provincias del NEA usando el método antropológico, se analiza su proceso cultural a través de su historia y de cómo fue avanzando la tecnología:"
     ],
     bullets: [
       {
         lead: "Inicios en salas recreativas (década de 1970):",
-        text: "Espacios públicos donde surgieron las primeras máquinas arcade (Pong, Pac-Man), constituyendo el primer fenómeno de reunión social presencial y competencia local en torno a las pantallas."
+        text: "Eran lugares públicos donde aparecieron las primeras máquinas arcade (como Pong o Pac-Man). Esto generó por primera vez que la gente se juntara en persona en un mismo lugar a competir frente a las pantallas."
       },
       {
         lead: "Llegada de las consolas domésticas (décadas de 1980 y 1990):",
-        text: "La masificación de consolas como Atari 2600 trasladó la experiencia de juego al hogar, transformando la interacción familiar y social directa."
+        text: "La venta masiva de consolas como la Atari 2600 llevó los videojuegos adentro de las casas, cambiando la forma en que se relacionaban directamente la familia y los amigos."
       },
       {
         lead: "Conectividad global, eSports y redes sociales (década de 1990 al presente):",
-        text: "La irrupción de Internet posibilitó el juego multijugador global y la profesionalización competitiva (eSports como League of Legends o Dota 2), además de plataformas como Twitch y YouTube para compartir partidas y formar comunidades vibrantes."
+        text: "La llegada de Internet permitió jugar con personas de todo el mundo y que competir se volviera profesional (eSports como League of Legends o Dota 2), además de crear plataformas como Twitch y YouTube para mostrar partidas y armar comunidades muy activas."
       }
     ],
     interaction: {
@@ -131,17 +159,17 @@ const SLIDES_DATA = [
   },
   {
     id: "slide-3-results",
-    number: 5,
+    number: 6,
     shortTitle: "Resultados Encuesta ",
     type: "poll-abcd-results",
     sourceSlideId: "slide-3",
-    sectionTitle: "RESULTADOS EN TIEMPO REAL · ENCUESTA DIAPOSITIVA 4",
+    sectionTitle: "RESULTADOS EN TIEMPO REAL · ENCUESTA DIAPOSITIVA 5",
     subSectionTitle: "Cantidad de respuestas en números por cada opción (A, B, C y D)",
     interaction: null
   },
   {
     id: "slide-4",
-    number: 6,
+    number: 7,
     shortTitle: "2.2 Método Antropológico",
     type: "content",
     sectionTitle: "2. DESARROLLO",
@@ -179,17 +207,17 @@ const SLIDES_DATA = [
   },
   {
     id: "slide-4-results",
-    number: 7,
+    number: 8,
     shortTitle: "Resultados Encuesta ",
     type: "poll-abcd-results",
     sourceSlideId: "slide-4",
-    sectionTitle: "RESULTADOS EN TIEMPO REAL · ENCUESTA DIAPOSITIVA 6",
+    sectionTitle: "RESULTADOS EN TIEMPO REAL · ENCUESTA DIAPOSITIVA 7",
     subSectionTitle: "Cantidad de respuestas en números por cada opción (A, B, C y D)",
     interaction: null
   },
   {
     id: "slide-5",
-    number: 8,
+    number: 9,
     shortTitle: "2.3 Estudio Comparativo ",
     type: "content",
     sectionTitle: "2. DESARROLLO",
@@ -228,7 +256,7 @@ const SLIDES_DATA = [
   },
   {
     id: "slide-5-tf-chart",
-    number: 9,
+    number: 10,
     shortTitle: "Gráfico V/F ",
     type: "tf-stats-chart",
     sourceSlideId: "slide-5",
@@ -238,7 +266,7 @@ const SLIDES_DATA = [
   },
   {
     id: "slide-dual-poll",
-    number: 10,
+    number: 11,
     shortTitle: "Encuesta Doble: Juego e Identidad Gamer",
     type: "dual-poll",
     sectionTitle: "ENCUESTA DOBLE EN TIEMPO REAL",
@@ -263,17 +291,17 @@ const SLIDES_DATA = [
   },
   {
     id: "slide-dual-poll-3d-chart",
-    number: 11,
+    number: 12,
     shortTitle: "Gráfico 3D: Juego e Identidad Gamer",
     type: "dual-poll-3d-chart",
     sourceSlideId: "slide-dual-poll",
     sectionTitle: "GRÁFICO 3D EN TIEMPO REAL · RESULTADOS DE ENCUESTAS",
-    subSectionTitle: "Estadísticas numéricas de la Diapositiva 10 (Solo números)",
+    subSectionTitle: "Estadísticas numéricas de la Diapositiva 11 (Solo números)",
     interaction: null
   },
   {
     id: "slide-6",
-    number: 12,
+    number: 13,
     shortTitle: "2.4 Identidad Social ",
     type: "content",
     sectionTitle: "2. DESARROLLO",
@@ -304,7 +332,7 @@ const SLIDES_DATA = [
   },
   {
     id: "slide-7",
-    number: 13,
+    number: 14,
     shortTitle: "2.5 Posmodernidad y NEA ",
     type: "content",
     sectionTitle: "2. DESARROLLO",
@@ -339,7 +367,7 @@ const SLIDES_DATA = [
   },
   {
     id: "slide-8",
-    number: 14,
+    number: 15,
     shortTitle: "2.6 Sesgos y Toxicidad ",
     type: "content",
     sectionTitle: "2. DESARROLLO",
@@ -372,7 +400,7 @@ const SLIDES_DATA = [
   },
   {
     id: "slide-8-tf-chart",
-    number: 15,
+    number: 16,
     shortTitle: "Gráfico V/F ",
     type: "tf-stats-chart",
     sourceSlideId: "slide-8",
@@ -382,7 +410,7 @@ const SLIDES_DATA = [
   },
   {
     id: "slide-9",
-    number: 16,
+    number: 17,
     shortTitle: "2.7 Inclusión y Exclusión ",
     type: "content",
     sectionTitle: "2. DESARROLLO",
@@ -407,7 +435,7 @@ const SLIDES_DATA = [
   },
   {
     id: "slide-10",
-    number: 17,
+    number: 18,
     shortTitle: "3. Conclusión",
     type: "closing",
     sectionTitle: "3. CONCLUSIÓN",
@@ -439,12 +467,16 @@ const APP_STATE = {
   firebaseRoomRef: null,
   localChannel: null,
   participantUser: null,
+  kickedByReset: false,
   slide2SurveyOpened: false,
   slide2SurveyAnimating: false,
   openedSurveys: {},
   lastServerUpdatedAt: 0,
   serverTimeOffset: 0,
-  autoAdvancedForStamp: "",
+  activeTimerSlideId: null,
+  activeTimerLocalStart: 0,
+  activeTimerDurationMs: 15000,
+  activeTimerAutoAdvanced: false,
   isFetchingPhp: false,
   pendingSlideRequests: 0,
   lastLocalSlideChangeAt: 0,
@@ -452,6 +484,7 @@ const APP_STATE = {
   room: {
     currentSlide: 0,
     slideSeq: 0,
+    resetAt: 0,
     revealAnswers: false,
     openedSurveys: {},
     users: {},
@@ -475,27 +508,55 @@ function nextSlideSeq() {
 const SURVEY_TIMER_DURATION_SEC = 15;
 
 function getEstimatedServerNow() {
-  return Date.now() + (APP_STATE.serverTimeOffset || 0);
+  return Date.now();
+}
+
+function getTimerKeyForSlide(slideId) {
+  return String(slideId || "").startsWith("slide-dual-poll") ? "slide-dual-poll" : String(slideId || "");
+}
+
+function startLocalSurveyTimer(slideId, durationMs = SURVEY_TIMER_DURATION_SEC * 1000) {
+  const timerKey = getTimerKeyForSlide(slideId);
+  if (!timerKey) return;
+  const maxMs = SURVEY_TIMER_DURATION_SEC * 1000;
+  const cleanDuration = Math.max(0, Math.min(maxMs, Number(durationMs) || maxMs));
+  APP_STATE.activeTimerSlideId = timerKey;
+  APP_STATE.activeTimerLocalStart = Date.now();
+  APP_STATE.activeTimerDurationMs = cleanDuration;
+  APP_STATE.activeTimerAutoAdvanced = false;
+}
+
+function stopLocalSurveyTimer() {
+  APP_STATE.activeTimerSlideId = null;
+  APP_STATE.activeTimerLocalStart = 0;
+  APP_STATE.activeTimerDurationMs = SURVEY_TIMER_DURATION_SEC * 1000;
+  APP_STATE.activeTimerAutoAdvanced = false;
 }
 
 function getSurveyTimerState(slideId) {
-  const timerKey = String(slideId || "").startsWith("slide-dual-poll") ? "slide-dual-poll" : slideId;
-  const openedAt = Number(APP_STATE.room.openedSurveys?.[timerKey] || 0);
-  if (!openedAt) {
+  const timerKey = getTimerKeyForSlide(slideId);
+  const totalMs = SURVEY_TIMER_DURATION_SEC * 1000;
+  const isOpened = Boolean(
+    APP_STATE.room.openedSurveys?.[timerKey] ||
+    APP_STATE.openedSurveys?.[timerKey] ||
+    (timerKey === "slide-2" && APP_STATE.slide2SurveyOpened)
+  );
+
+  if (!isOpened || APP_STATE.activeTimerSlideId !== timerKey || !APP_STATE.activeTimerLocalStart) {
     return {
       active: false,
       elapsedMs: 0,
-      remainingMs: SURVEY_TIMER_DURATION_SEC * 1000,
+      remainingMs: totalMs,
       remainingSec: SURVEY_TIMER_DURATION_SEC,
       pct: 100,
       urgent: false,
-      openedAt: 0,
       timerKey
     };
   }
-  const totalMs = SURVEY_TIMER_DURATION_SEC * 1000;
-  const elapsedMs = Math.max(0, getEstimatedServerNow() - openedAt);
-  const remainingMs = Math.max(0, totalMs - elapsedMs);
+
+  const localElapsed = Math.max(0, Date.now() - APP_STATE.activeTimerLocalStart);
+  const remainingMs = Math.max(0, APP_STATE.activeTimerDurationMs - localElapsed);
+  const elapsedMs = totalMs - remainingMs;
   const remainingSec = Math.ceil(remainingMs / 1000);
   const pct = Math.max(0, Math.min(100, (remainingMs / totalMs) * 100));
   return {
@@ -505,7 +566,6 @@ function getSurveyTimerState(slideId) {
     remainingSec,
     pct,
     urgent: remainingSec <= 5,
-    openedAt,
     timerKey
   };
 }
@@ -534,7 +594,7 @@ function tickSurveyCountdown() {
   if (!isTimedSlide) return;
 
   const st = getSurveyTimerState(slide.id);
-  const boxes = document.querySelectorAll(`[data-timer-slide="${slide.id}"]`);
+  const boxes = document.querySelectorAll(`[data-timer-slide="${st.timerKey}"]`);
   boxes.forEach((box) => {
     const secEl = box.querySelector(".survey-timer-sec");
     const fillEl = box.querySelector(".survey-countdown-bar-fill");
@@ -543,12 +603,21 @@ function tickSurveyCountdown() {
     box.classList.toggle("urgent", Boolean(st.urgent));
   });
 
-  if (st.active && st.remainingMs <= 0 && st.elapsedMs < 22000) {
-    const stampKey = `${slide.id}_${st.openedAt}`;
-    if (!APP_STATE.isQrGuest && APP_STATE.autoAdvancedForStamp !== stampKey) {
-      APP_STATE.autoAdvancedForStamp = stampKey;
-      changeSlide(1);
-    }
+  // Únicamente avanzar automáticamente a la siguiente diapositiva cuando:
+  // 1) Es la computadora del presentador (!APP_STATE.isQrGuest)
+  // 2) Está en la Vista de Participante (APP_STATE.role === "participant")
+  // 3) El minutero de 15s de la encuesta actual fue iniciado y llegó a 0
+  if (
+    !APP_STATE.isQrGuest &&
+    APP_STATE.role === "participant" &&
+    st.active &&
+    APP_STATE.activeTimerSlideId === st.timerKey &&
+    st.remainingMs <= 0 &&
+    !APP_STATE.activeTimerAutoAdvanced
+  ) {
+    APP_STATE.activeTimerAutoAdvanced = true;
+    stopLocalSurveyTimer();
+    changeSlide(1);
   }
 }
 
@@ -622,21 +691,27 @@ function initBroadcastChannel() {
   if (saved) {
     try {
       const parsed = JSON.parse(saved);
-      mergeRoomState(parsed);
+      if (APP_STATE.isQrGuest) {
+        mergeRoomState(parsed);
+      } else if (parsed && typeof parsed === "object") {
+        // En la PC del presentador, conservar únicamente usuarios y respuestas previos sin saltar de diapositiva ni activar minuteros viejos
+        APP_STATE.room.users = { ...ensurePlainObject(APP_STATE.room.users), ...ensurePlainObject(parsed.users) };
+        APP_STATE.room.responses = { ...ensurePlainObject(APP_STATE.room.responses), ...ensurePlainObject(parsed.responses) };
+      }
     } catch (e) { }
   }
 
   if ("BroadcastChannel" in window) {
     APP_STATE.localChannel = new BroadcastChannel("agy_channel_" + APP_STATE.roomId);
     APP_STATE.localChannel.onmessage = (ev) => {
-      if (ev.data && ev.data.type === "ROOM_UPDATE") {
+      if (ev.data && ev.data.type === "ROOM_UPDATE" && APP_STATE.isQrGuest) {
         mergeRoomState(ev.data.state);
       }
     };
   }
 
   window.addEventListener("storage", (ev) => {
-    if (ev.key === storageKey && ev.newValue) {
+    if (ev.key === storageKey && ev.newValue && APP_STATE.isQrGuest) {
       try {
         mergeRoomState(JSON.parse(ev.newValue));
       } catch (e) { }
@@ -851,7 +926,7 @@ function initCloudRealtimeSync() {
   // 2. Canal HTTPS SSE de respaldo (ntfy.sh puerto 443) por si la red bloquea puertos WebSocket
   if ("EventSource" in window) {
     try {
-      const es = new EventSource(`https://ntfy.sh/${encodeURIComponent(ntfyTopic)}/sse`);
+      const es = new EventSource(`https://ntfy.sh/${encodeURIComponent(ntfyTopic)}/sse?since=now`);
       es.onmessage = (ev) => {
         try {
           const outer = JSON.parse(ev.data);
@@ -873,10 +948,16 @@ function initCloudRealtimeSync() {
 }
 
 function handleCloudPacket(packet) {
-  if (packet.type === "STATE_SYNC" && packet.state) {
-    if (packet.serverNow) {
-      APP_STATE.serverTimeOffset = Number(packet.serverNow) - Date.now();
+  if (packet.type === "ROOM_RESET") {
+    if (APP_STATE.isQrGuest) {
+      applyFullClientReset(Number(packet.resetAt || Date.now()), Number(packet.slideSeq || 0));
     }
+    return;
+  }
+  if (packet.type === "STATE_SYNC" && packet.state) {
+    // La computadora del presentador (!isQrGuest) es la única fuente de verdad de las diapositivas;
+    // nunca debe cambiar de diapositiva por mensajes retenidos en la nube o de otras sesiones
+    if (!APP_STATE.isQrGuest) return;
     mergeRoomState(packet.state, true);
     APP_STATE.initialServerSyncDone = true;
   } else if (packet.type === "REQUEST_STATE") {
@@ -888,8 +969,38 @@ function handleCloudPacket(packet) {
   }
 }
 
+function applyFullClientReset(resetAtStamp, nextSlideSeqVal) {
+  stopLocalSurveyTimer();
+  APP_STATE.participantUser = null;
+  APP_STATE.kickedByReset = true;
+  APP_STATE.slide2SurveyOpened = false;
+  APP_STATE.slide2SurveyAnimating = false;
+  APP_STATE.openedSurveys = {};
+  try {
+    localStorage.removeItem("agy_gamer_participant_" + APP_STATE.roomId);
+    localStorage.removeItem("agy_room_state_" + APP_STATE.roomId);
+  } catch (e) { }
+  APP_STATE.room = {
+    currentSlide: 0,
+    slideSeq: Math.max(Number(APP_STATE.room.slideSeq || 0), Number(nextSlideSeqVal || 0)),
+    resetAt: Math.max(Number(APP_STATE.room.resetAt || 0), Number(resetAtStamp || Date.now())),
+    revealAnswers: false,
+    openedSurveys: {},
+    users: {},
+    responses: {},
+    updatedAt: Date.now()
+  };
+  renderAll();
+}
+
 function handleIncomingCloudAction(payload) {
   if (!payload || !payload.action) return;
+  const curResetAt = Number(APP_STATE.room.resetAt || 0);
+  if (curResetAt > 0 && payload.resetAt !== undefined && Number(payload.resetAt) < curResetAt) {
+    // Descartar acciones de participantes anteriores al último reinicio de sala
+    return;
+  }
+
   APP_STATE.room.users = ensurePlainObject(APP_STATE.room.users);
   APP_STATE.room.responses = ensurePlainObject(APP_STATE.room.responses);
 
@@ -901,6 +1012,7 @@ function handleIncomingCloudAction(payload) {
     const existingScore = existing ? Number(existing.score || 0) : 0;
     APP_STATE.room.users[uid] = {
       ...payload.user,
+      joinedAt: Date.now(),
       score: Math.max(existingScore, Number(payload.user.score || 0)),
       lastSeen: Date.now()
     };
@@ -912,9 +1024,16 @@ function handleIncomingCloudAction(payload) {
     payload.response
   ) {
     const { slideId, userId, response, scoreDelta } = payload;
+    // Si el participante fue eliminado por un reinicio de sala y no volvió a registrarse escaneando el QR, ignorar su respuesta
+    if (curResetAt > 0 && !APP_STATE.room.users[userId]) {
+      return;
+    }
     APP_STATE.room.responses[slideId] = ensurePlainObject(APP_STATE.room.responses[slideId]);
     const alreadyHad = APP_STATE.room.responses[slideId][userId] !== undefined;
-    APP_STATE.room.responses[slideId][userId] = response;
+    APP_STATE.room.responses[slideId][userId] = {
+      ...response,
+      timestamp: Date.now()
+    };
 
     if (!APP_STATE.room.users[userId]) {
       APP_STATE.room.users[userId] = {
@@ -947,14 +1066,44 @@ function handleIncomingCloudAction(payload) {
   }
 }
 
+function publishCloudReset(resetAt, slideSeq) {
+  if (APP_STATE.isQrGuest) return;
+  const { stateTopic, actionTopic, ntfyTopic } = getCloudTopics();
+  const packetStr = JSON.stringify({
+    type: "ROOM_RESET",
+    senderId: APP_STATE.clientId,
+    resetAt,
+    slideSeq
+  });
+
+  APP_STATE.mqttClients.forEach((client) => {
+    try {
+      if (client && client.connected) {
+        client.publish(stateTopic, packetStr, { qos: 0, retain: false });
+        client.publish(actionTopic, packetStr, { qos: 0, retain: false });
+      }
+    } catch (e) { }
+  });
+
+  fetch(`https://ntfy.sh/${encodeURIComponent(ntfyTopic)}`, {
+    method: "POST",
+    body: packetStr
+  }).catch(() => { });
+}
+
 function publishCloudState(alsoSendNtfy = true) {
   if (APP_STATE.isQrGuest) return;
   const { stateTopic, ntfyTopic } = getCloudTopics();
+  const curSlide = SLIDES_DATA[APP_STATE.room.currentSlide || 0];
+  const st = curSlide ? getSurveyTimerState(curSlide.id) : null;
   const packetStr = JSON.stringify({
     type: "STATE_SYNC",
     senderId: APP_STATE.clientId,
-    serverNow: getEstimatedServerNow(),
-    state: APP_STATE.room
+    state: {
+      ...APP_STATE.room,
+      timerSlideId: st && st.active ? st.timerKey : null,
+      timerRemainingMs: st && st.active ? st.remainingMs : 0
+    }
   });
 
   APP_STATE.mqttClients.forEach((client) => {
@@ -1006,9 +1155,6 @@ async function fetchPhpState() {
     });
     if (!res.ok) return;
     const data = await res.json();
-    if (data && data.serverNow) {
-      APP_STATE.serverTimeOffset = Number(data.serverNow) - Date.now();
-    }
     let linksChanged = false;
     if (data && data.publicUrl && data.publicUrl !== APP_STATE.publicTunnelUrl) {
       APP_STATE.publicTunnelUrl = data.publicUrl;
@@ -1065,9 +1211,6 @@ async function postPhpAction(payload) {
     });
     if (res.ok) {
       const data = await res.json();
-      if (data && data.serverNow) {
-        APP_STATE.serverTimeOffset = Number(data.serverNow) - Date.now();
-      }
       if (data && data.state) {
         const serverUpdated = Number(data.state.updatedAt || 0);
         APP_STATE.lastServerUpdatedAt = Math.max(Number(APP_STATE.lastServerUpdatedAt || 0), serverUpdated);
@@ -1096,12 +1239,40 @@ function mergeRoomState(incoming, fromServer = false) {
 
   const incSeq = Number(incoming.slideSeq || 0);
   const curSeq = Number(APP_STATE.room.slideSeq || 0);
+  const incResetAt = Number(incoming.resetAt || 0);
+  const curResetAt = Number(APP_STATE.room.resetAt || 0);
 
-  // Nunca permitir que un estado con secuencia de diapositiva anterior retroceda la presentación
-  if (incSeq > 0 && curSeq > 0 && incSeq < curSeq) {
-    // Aún así fusionar usuarios y respuestas nuevos sin tocar la diapositiva actual
-    APP_STATE.room.users = { ...ensurePlainObject(APP_STATE.room.users), ...ensurePlainObject(incoming.users) };
-    APP_STATE.room.responses = { ...ensurePlainObject(APP_STATE.room.responses), ...ensurePlainObject(incoming.responses) };
+  // En la computadora del presentador (!isQrGuest), NUNCA permitir que ningún mensaje externo
+  // cambie la diapositiva, abra encuestas ni active minuteros por su cuenta
+  if (!APP_STATE.isQrGuest) {
+    // Si el estado entrante es anterior al último reinicio de sala, ignorar por completo usuarios y respuestas viejos
+    if (curResetAt > 0 && incResetAt < curResetAt) {
+      renderAll();
+      return;
+    }
+    const filteredUsers = {};
+    Object.entries(ensurePlainObject(incoming.users)).forEach(([uid, u]) => {
+      if (u && (!curResetAt || Number(u.joinedAt || u.lastSeen || 0) >= curResetAt)) {
+        filteredUsers[uid] = u;
+      }
+    });
+    const filteredResponses = {};
+    Object.entries(ensurePlainObject(incoming.responses)).forEach(([sid, slideRes]) => {
+      const cleanSlideRes = {};
+      Object.entries(ensurePlainObject(slideRes)).forEach(([uid, r]) => {
+        if (r && (!curResetAt || Number(r.timestamp || 0) >= curResetAt)) {
+          cleanSlideRes[uid] = r;
+        }
+      });
+      if (Object.keys(cleanSlideRes).length > 0) {
+        filteredResponses[sid] = cleanSlideRes;
+      }
+    });
+    APP_STATE.room.users = { ...ensurePlainObject(APP_STATE.room.users), ...filteredUsers };
+    APP_STATE.room.responses = { ...ensurePlainObject(APP_STATE.room.responses), ...filteredResponses };
+    APP_STATE.room.slideSeq = Math.max(curSeq, incSeq);
+    APP_STATE.room.resetAt = Math.max(curResetAt, incResetAt);
+    APP_STATE.room.updatedAt = Math.max(curTime, incTime) || Date.now();
     if (APP_STATE.participantUser && APP_STATE.room.users[APP_STATE.participantUser.id]) {
       APP_STATE.participantUser.score = APP_STATE.room.users[APP_STATE.participantUser.id].score || 0;
     }
@@ -1109,119 +1280,143 @@ function mergeRoomState(incoming, fromServer = false) {
     return;
   }
 
-  // En la computadora del presentador (!isQrGuest), una vez sincronizada o tras cualquier acción local,
-  // ninguna encuesta o poll en segundo plano puede retroceder ni cambiar la diapositiva por su cuenta
-  const isMasterPresenter = !APP_STATE.isQrGuest && (APP_STATE.initialServerSyncDone || APP_STATE.lastLocalSlideChangeAt > 0);
-  const keepLocalSlideState =
-    isMasterPresenter &&
-    (APP_STATE.pendingSlideRequests > 0 ||
-      Date.now() - APP_STATE.lastLocalSlideChangeAt < 4000 ||
-      incSeq <= curSeq);
+  // En los celulares de los participantes (isQrGuest === true):
+  // Si el presentador reinició la sala mientras el participante estaba conectado o registrado,
+  // eliminar al participante y obligarlo a volver a escanear el QR
+  const incUsersObj = ensurePlainObject(incoming.users);
+  if (
+    (APP_STATE.initialServerSyncDone && incResetAt > 0 && incResetAt > curResetAt) ||
+    (APP_STATE.participantUser &&
+      ((incResetAt > 0 && incResetAt > Number(APP_STATE.participantUser.joinedAt || 0)) ||
+        (Object.keys(incUsersObj).length === 0 && Number(incoming.currentSlide ?? 0) === 0 && incSeq > curSeq)))
+  ) {
+    applyFullClientReset(incResetAt || Date.now(), incSeq);
+    return;
+  }
+
+  // Nunca permitir que un estado con secuencia de diapositiva anterior retroceda la presentación
+  if (APP_STATE.initialServerSyncDone && incSeq > 0 && curSeq > 0 && incSeq < curSeq) {
+    APP_STATE.room.users = incUsersObj;
+    APP_STATE.room.responses = ensurePlainObject(incoming.responses);
+    if (APP_STATE.participantUser && APP_STATE.room.users[APP_STATE.participantUser.id]) {
+      APP_STATE.participantUser.score = APP_STATE.room.users[APP_STATE.participantUser.id].score || 0;
+    }
+    renderAll();
+    return;
+  }
 
   const prevOpened = ensurePlainObject(APP_STATE.room.openedSurveys);
-  const nextOpened = keepLocalSlideState
-    ? prevOpened
-    : ensurePlainObject(incoming.openedSurveys);
+  const nextOpened = ensurePlainObject(incoming.openedSurveys);
 
-  if (!keepLocalSlideState) {
-    // Detectar si se acaba de activar "Encuesta" o "Next Level" desde otro dispositivo (ej. la PC) para reproducir el efecto en el celular
-    if (nextOpened["slide-2"] && !prevOpened["slide-2"] && !APP_STATE.slide2SurveyOpened) {
-      APP_STATE.slide2SurveyOpened = true;
-      APP_STATE.slide2SurveyAnimating = true;
-      playRetroArcadeSound();
-      setTimeout(() => {
-        APP_STATE.slide2SurveyAnimating = false;
-      }, 950);
-    } else {
-      APP_STATE.slide2SurveyOpened = Boolean(nextOpened["slide-2"]);
-    }
+  // Detectar si se acaba de activar "Encuesta" o "Next Level" desde la PC del presentador para reproducir el efecto y el minutero en el celular
+  if (nextOpened["slide-2"] && !prevOpened["slide-2"] && !APP_STATE.slide2SurveyOpened) {
+    APP_STATE.slide2SurveyOpened = true;
+    APP_STATE.slide2SurveyAnimating = true;
+    startLocalSurveyTimer("slide-2", incoming.timerRemainingMs || SURVEY_TIMER_DURATION_SEC * 1000);
+    playRetroArcadeSound();
+    setTimeout(() => {
+      APP_STATE.slide2SurveyAnimating = false;
+    }, 950);
+  } else {
+    APP_STATE.slide2SurveyOpened = Boolean(nextOpened["slide-2"]);
+  }
 
-    if (nextOpened["slide-3"] && !prevOpened["slide-3"] && !APP_STATE.openedSurveys["slide-3"]) {
-      APP_STATE.openedSurveys["slide-3"] = true;
-      APP_STATE.openedSurveys["slide-3_anim"] = true;
-      playNextLevelSound();
-      setTimeout(() => {
-        APP_STATE.openedSurveys["slide-3_anim"] = false;
-      }, 1050);
-    } else {
-      APP_STATE.openedSurveys["slide-3"] = Boolean(nextOpened["slide-3"]);
-    }
+  if (nextOpened["slide-3"] && !prevOpened["slide-3"] && !APP_STATE.openedSurveys["slide-3"]) {
+    APP_STATE.openedSurveys["slide-3"] = true;
+    APP_STATE.openedSurveys["slide-3_anim"] = true;
+    startLocalSurveyTimer("slide-3", incoming.timerRemainingMs || SURVEY_TIMER_DURATION_SEC * 1000);
+    playNextLevelSound();
+    setTimeout(() => {
+      APP_STATE.openedSurveys["slide-3_anim"] = false;
+    }, 1050);
+  } else {
+    APP_STATE.openedSurveys["slide-3"] = Boolean(nextOpened["slide-3"]);
+  }
 
-    if (nextOpened["slide-4"] && !prevOpened["slide-4"] && !APP_STATE.openedSurveys["slide-4"]) {
-      APP_STATE.openedSurveys["slide-4"] = true;
-      APP_STATE.openedSurveys["slide-4_anim"] = true;
-      playCoinsBurstSound();
-      setTimeout(() => {
-        APP_STATE.openedSurveys["slide-4_anim"] = false;
-      }, 1650);
-    } else {
-      APP_STATE.openedSurveys["slide-4"] = Boolean(nextOpened["slide-4"]);
-    }
+  if (nextOpened["slide-4"] && !prevOpened["slide-4"] && !APP_STATE.openedSurveys["slide-4"]) {
+    APP_STATE.openedSurveys["slide-4"] = true;
+    APP_STATE.openedSurveys["slide-4_anim"] = true;
+    startLocalSurveyTimer("slide-4", incoming.timerRemainingMs || SURVEY_TIMER_DURATION_SEC * 1000);
+    playCoinsBurstSound();
+    setTimeout(() => {
+      APP_STATE.openedSurveys["slide-4_anim"] = false;
+    }, 1650);
+  } else {
+    APP_STATE.openedSurveys["slide-4"] = Boolean(nextOpened["slide-4"]);
+  }
 
-    if (nextOpened["slide-5"] && !prevOpened["slide-5"] && !APP_STATE.openedSurveys["slide-5"]) {
-      APP_STATE.openedSurveys["slide-5"] = true;
-      APP_STATE.openedSurveys["slide-5_anim"] = true;
-      playPokeball3dSound();
-      setTimeout(() => {
-        APP_STATE.openedSurveys["slide-5_anim"] = false;
-      }, 1800);
-    } else {
-      APP_STATE.openedSurveys["slide-5"] = Boolean(nextOpened["slide-5"]);
-    }
+  if (nextOpened["slide-5"] && !prevOpened["slide-5"] && !APP_STATE.openedSurveys["slide-5"]) {
+    APP_STATE.openedSurveys["slide-5"] = true;
+    APP_STATE.openedSurveys["slide-5_anim"] = true;
+    startLocalSurveyTimer("slide-5", incoming.timerRemainingMs || SURVEY_TIMER_DURATION_SEC * 1000);
+    playPokeball3dSound();
+    setTimeout(() => {
+      APP_STATE.openedSurveys["slide-5_anim"] = false;
+    }, 1800);
+  } else {
+    APP_STATE.openedSurveys["slide-5"] = Boolean(nextOpened["slide-5"]);
+  }
 
-    if (nextOpened["slide-7"] && !prevOpened["slide-7"] && !APP_STATE.openedSurveys["slide-7"]) {
-      APP_STATE.openedSurveys["slide-7"] = true;
-      APP_STATE.openedSurveys["slide-7_anim"] = true;
-      playModern3dGameSound();
-      setTimeout(() => {
-        APP_STATE.openedSurveys["slide-7_anim"] = false;
-      }, 1250);
-    } else {
-      APP_STATE.openedSurveys["slide-7"] = Boolean(nextOpened["slide-7"]);
-    }
+  if (nextOpened["slide-7"] && !prevOpened["slide-7"] && !APP_STATE.openedSurveys["slide-7"]) {
+    APP_STATE.openedSurveys["slide-7"] = true;
+    APP_STATE.openedSurveys["slide-7_anim"] = true;
+    startLocalSurveyTimer("slide-7", incoming.timerRemainingMs || SURVEY_TIMER_DURATION_SEC * 1000);
+    playModern3dGameSound();
+    setTimeout(() => {
+      APP_STATE.openedSurveys["slide-7_anim"] = false;
+    }, 1250);
+  } else {
+    APP_STATE.openedSurveys["slide-7"] = Boolean(nextOpened["slide-7"]);
+  }
 
-    if (nextOpened["slide-8"] && !prevOpened["slide-8"] && !APP_STATE.openedSurveys["slide-8"]) {
-      APP_STATE.openedSurveys["slide-8"] = true;
-      APP_STATE.openedSurveys["slide-8_anim"] = true;
-      playModern3dOrbitalDropSound();
-      setTimeout(() => {
-        APP_STATE.openedSurveys["slide-8_anim"] = false;
-      }, 1450);
-    } else {
-      APP_STATE.openedSurveys["slide-8"] = Boolean(nextOpened["slide-8"]);
-    }
+  if (nextOpened["slide-8"] && !prevOpened["slide-8"] && !APP_STATE.openedSurveys["slide-8"]) {
+    APP_STATE.openedSurveys["slide-8"] = true;
+    APP_STATE.openedSurveys["slide-8_anim"] = true;
+    startLocalSurveyTimer("slide-8", incoming.timerRemainingMs || SURVEY_TIMER_DURATION_SEC * 1000);
+    playModern3dOrbitalDropSound();
+    setTimeout(() => {
+      APP_STATE.openedSurveys["slide-8_anim"] = false;
+    }, 1450);
+  } else {
+    APP_STATE.openedSurveys["slide-8"] = Boolean(nextOpened["slide-8"]);
+  }
 
-    if (nextOpened["slide-10"] && !prevOpened["slide-10"] && !APP_STATE.openedSurveys["slide-10"]) {
-      APP_STATE.openedSurveys["slide-10"] = true;
-      APP_STATE.openedSurveys["slide-10_anim"] = true;
-      playFinalLeaderboardSound();
-      setTimeout(() => {
-        APP_STATE.openedSurveys["slide-10_anim"] = false;
-      }, 1100);
-    } else {
-      APP_STATE.openedSurveys["slide-10"] = Boolean(nextOpened["slide-10"]);
+  if (nextOpened["slide-10"] && !prevOpened["slide-10"] && !APP_STATE.openedSurveys["slide-10"]) {
+    APP_STATE.openedSurveys["slide-10"] = true;
+    APP_STATE.openedSurveys["slide-10_anim"] = true;
+    playFinalLeaderboardSound();
+    setTimeout(() => {
+      APP_STATE.openedSurveys["slide-10_anim"] = false;
+    }, 1100);
+  } else {
+    APP_STATE.openedSurveys["slide-10"] = Boolean(nextOpened["slide-10"]);
+  }
+
+  // Sincronizar minutero en el celular si el presentador tiene un minutero activo
+  if (incoming.timerSlideId && Number(incoming.timerRemainingMs) > 0) {
+    if (APP_STATE.activeTimerSlideId !== incoming.timerSlideId) {
+      startLocalSurveyTimer(incoming.timerSlideId, Number(incoming.timerRemainingMs));
     }
+  } else if (incoming.timerSlideId === null) {
+    stopLocalSurveyTimer();
+  }
+
+  const nextSlideIndex = Number(incoming.currentSlide ?? 0);
+  const nextSlideObj = SLIDES_DATA[nextSlideIndex];
+  if (nextSlideObj && nextSlideObj.id === "slide-dual-poll" && nextOpened["slide-dual-poll"] && APP_STATE.activeTimerSlideId !== "slide-dual-poll") {
+    startLocalSurveyTimer("slide-dual-poll", Number(incoming.timerRemainingMs) || SURVEY_TIMER_DURATION_SEC * 1000);
   }
 
   APP_STATE.room = {
-    currentSlide: keepLocalSlideState
-      ? Number(APP_STATE.room.currentSlide ?? 0)
-      : Number(incoming.currentSlide ?? 0),
+    currentSlide: nextSlideIndex,
     slideSeq: Math.max(curSeq, incSeq),
-    revealAnswers: keepLocalSlideState
-      ? Boolean(APP_STATE.room.revealAnswers)
-      : Boolean(incoming.revealAnswers),
+    resetAt: Math.max(curResetAt, incResetAt),
+    revealAnswers: Boolean(incoming.revealAnswers),
     openedSurveys: nextOpened,
-    users: { ...ensurePlainObject(APP_STATE.room.users), ...ensurePlainObject(incoming.users) },
-    responses: { ...ensurePlainObject(APP_STATE.room.responses), ...ensurePlainObject(incoming.responses) },
+    users: incUsersObj,
+    responses: ensurePlainObject(incoming.responses),
     updatedAt: Math.max(curTime, incTime) || Date.now()
   };
-
-  if (incoming.users && Object.keys(ensurePlainObject(incoming.users)).length === 0 && incSeq > curSeq && Number(incoming.currentSlide ?? 0) === 0) {
-    // Si fue un reinicio de sala (reset_room), limpiar usuarios y respuestas
-    APP_STATE.room.users = {};
-    APP_STATE.room.responses = {};
-  }
 
   // Actualizar puntaje del participante local si existe en la sala
   if (APP_STATE.participantUser && APP_STATE.room.users[APP_STATE.participantUser.id]) {
@@ -1363,6 +1558,23 @@ async function copyShortLink() {
    ========================================================= */
 function switchRole(newRole) {
   APP_STATE.role = newRole;
+  const currentSlideObj = SLIDES_DATA[APP_STATE.room.currentSlide || 0];
+  if (newRole === "presenter") {
+    // En la Vista de Presentador las diapositivas solo avanzan mediante los botones del presentador
+    stopLocalSurveyTimer();
+  } else if (newRole === "participant" && !APP_STATE.isQrGuest && currentSlideObj) {
+    if (currentSlideObj.id === "slide-dual-poll") {
+      APP_STATE.room.openedSurveys = ensurePlainObject(APP_STATE.room.openedSurveys);
+      APP_STATE.room.openedSurveys["slide-dual-poll"] = Date.now();
+      startLocalSurveyTimer("slide-dual-poll", SURVEY_TIMER_DURATION_SEC * 1000);
+      commitStateChange({
+        action: "open_survey",
+        slideId: "slide-dual-poll",
+        slideSeq: nextSlideSeq()
+      });
+      return;
+    }
+  }
   renderAll();
 }
 
@@ -1394,6 +1606,7 @@ window.addEventListener("click", (e) => {
 function prepareSlideTransitionPayload(nextIndex, prevIndex = null) {
   const targetSlide = SLIDES_DATA[nextIndex];
   const prevSlide = prevIndex !== null ? SLIDES_DATA[prevIndex] : null;
+  stopLocalSurveyTimer();
   APP_STATE.room.slideSeq = nextSlideSeq();
   APP_STATE.lastLocalSlideChangeAt = Date.now();
   const payload = {
@@ -1420,9 +1633,12 @@ function prepareSlideTransitionPayload(nextIndex, prevIndex = null) {
     delete APP_STATE.room.openedSurveys[targetSlide.id];
     payload.resetSlideId = targetSlide.id;
   } else if (targetSlide.id === "slide-dual-poll") {
-    const nowStamp = getEstimatedServerNow();
+    const nowStamp = Date.now();
     APP_STATE.room.openedSurveys["slide-dual-poll"] = nowStamp;
     payload.autoOpenSlideId = "slide-dual-poll";
+    if (APP_STATE.role === "participant" && !APP_STATE.isQrGuest) {
+      startLocalSurveyTimer("slide-dual-poll", SURVEY_TIMER_DURATION_SEC * 1000);
+    }
   }
 
   return payload;
@@ -1459,6 +1675,7 @@ function toggleRevealAnswers() {
 
 function registerParticipant(event) {
   event.preventDefault();
+  if (APP_STATE.kickedByReset) return;
   const input = document.getElementById("participant-name-input");
   const rawName = (input?.value || "").trim();
   if (!rawName) return;
@@ -1480,16 +1697,22 @@ function registerParticipant(event) {
 
   commitStateChange({
     action: "join_user",
+    resetAt: Number(APP_STATE.room.resetAt || 0),
     user: newUser
   });
 }
 
 function submitParticipantChoice(slideId, optionIndex) {
+  if (APP_STATE.kickedByReset) return;
   if (!APP_STATE.participantUser) {
+    if (APP_STATE.isQrGuest) {
+      renderAll();
+      return;
+    }
     const autoId = "u_" + Math.random().toString(36).substring(2, 9);
     const autoUser = {
       id: autoId,
-      name: "Participante " + Object.keys(APP_STATE.room.users || {}).length + 1,
+      name: "Participante " + (Object.keys(APP_STATE.room.users || {}).length + 1),
       score: 0,
       answersCount: 0,
       joinedAt: Date.now()
@@ -1552,6 +1775,7 @@ function submitParticipantChoice(slideId, optionIndex) {
 
   commitStateChange({
     action: "submit_response",
+    resetAt: Number(APP_STATE.room.resetAt || 0),
     slideId,
     userId: uid,
     response: responseObj,
@@ -1561,7 +1785,12 @@ function submitParticipantChoice(slideId, optionIndex) {
 
 function submitParticipantText(event, slideId) {
   event.preventDefault();
+  if (APP_STATE.kickedByReset) return;
   if (!APP_STATE.participantUser) {
+    if (APP_STATE.isQrGuest) {
+      renderAll();
+      return;
+    }
     const autoId = "u_" + Math.random().toString(36).substring(2, 9);
     const autoUser = {
       id: autoId,
@@ -1614,6 +1843,7 @@ function submitParticipantText(event, slideId) {
 
   commitStateChange({
     action: "submit_response",
+    resetAt: Number(APP_STATE.room.resetAt || 0),
     slideId,
     userId: uid,
     response: responseObj,
@@ -1647,7 +1877,7 @@ function simulateClassActivity() {
         name,
         score: 0,
         answersCount: 0,
-        joinedAt: Date.now() - idx * 4000
+        joinedAt: Date.now() + idx
       };
     }
   });
@@ -1735,22 +1965,32 @@ function simulateClassActivity() {
 }
 
 function resetRoomData() {
-  if (!confirm("¿Deseás reiniciar todas las respuestas y puntajes de la sala actual?")) return;
+  if (!confirm("¿Deseás reiniciar toda la sala en general? Se eliminarán todos los participantes, respuestas y puntajes, todo quedará en cero y los participantes deberán volver a escanear el código QR.")) return;
+  stopLocalSurveyTimer();
+  const nowStamp = Date.now();
   const nextSeq = nextSlideSeq();
-  APP_STATE.lastLocalSlideChangeAt = Date.now();
+  APP_STATE.lastLocalSlideChangeAt = nowStamp;
   APP_STATE.slide2SurveyOpened = false;
   APP_STATE.slide2SurveyAnimating = false;
   APP_STATE.openedSurveys = {};
+  APP_STATE.participantUser = null;
+  APP_STATE.kickedByReset = false;
+  try {
+    localStorage.removeItem("agy_gamer_participant_" + APP_STATE.roomId);
+    localStorage.removeItem("agy_room_state_" + APP_STATE.roomId);
+  } catch (e) { }
   APP_STATE.room = {
     currentSlide: 0,
     slideSeq: nextSeq,
+    resetAt: nowStamp,
     revealAnswers: false,
     openedSurveys: {},
     users: {},
     responses: {},
-    updatedAt: Date.now()
+    updatedAt: nowStamp
   };
-  commitStateChange({ action: "reset_room", slideSeq: nextSeq });
+  publishCloudReset(nowStamp, nextSeq);
+  commitStateChange({ action: "reset_room", slideSeq: nextSeq, resetAt: nowStamp });
 }
 
 /* =========================================================
@@ -1841,38 +2081,15 @@ function renderPresenterSlide() {
   let bodyHtml = "";
 
   if (slide.type === "cover-institutional") {
-    const rowsHtml = slide.institution.table
-      .map(
-        ([label, val]) => `
-        <tr>
-          <th>${escapeHtml(label)}</th>
-          <td>${escapeHtml(val)}</td>
-        </tr>`
-      )
-      .join("");
-
     bodyHtml = `
-      <div>
-        <div class="pdf-cover-header">
-          <h1>${escapeHtml(slide.institution.title)}</h1>
-          <h2>${escapeHtml(slide.institution.subtitle)}</h2>
-          <p class="pdf-subtitle">${escapeHtml(slide.institution.topic)}</p>
-        </div>
-
-        <div style="max-width: 760px; margin: 0 auto;">
-          <table class="pdf-meta-table">
-            <tbody>
-              ${rowsHtml}
-            </tbody>
-          </table>
-          <div style="margin-top: 1.25rem;">
-            <button class="btn btn-primary" style="padding: 0.65rem 1.25rem; font-size: 0.92rem;" onclick="changeSlide(1)">
-              Comenzar Presentación →
-            </button>
-          </div>
-        </div>
+      <div style="position:relative;width:100%;min-height:74vh;border-radius:14px;overflow:hidden;background:#08071a url('portada_slide1.jpg') center center / 100% 100% no-repeat;box-shadow:0 16px 38px rgba(15,23,42,0.45);display:flex;align-items:flex-end;justify-content:center;padding:1.5rem;">
+        <button class="btn btn-primary" style="padding:0.75rem 1.65rem;font-size:1rem;font-weight:800;box-shadow:0 8px 24px rgba(0,0,0,0.65);border:2px solid rgba(255,255,255,0.28);" onclick="changeSlide(1)">
+          Comenzar Presentación →
+        </button>
       </div>
     `;
+  } else if (slide.type === "gamer-profile") {
+    bodyHtml = renderGamerProfileThreeColBlock(slide, false);
   } else if (slide.type === "cover") {
     const avatarsHtml =
       usersList.length > 0
@@ -1974,7 +2191,6 @@ function renderPresenterSlide() {
       slide.id === "slide-2"
         ? `
           <div class="interactive-block">
-            ${renderSurveyTimerWidget(slide.id)}
             <div class="interactive-header">
               <div style="display:flex;align-items:center;gap:0.6rem;">
                 <span class="interactive-type-tag">${escapeHtml(slide.interaction.badge)}</span>
@@ -2116,6 +2332,65 @@ function renderPresenterSlide() {
   }
 }
 
+function renderGamerProfileThreeColBlock(slide, showNextButton = false) {
+  const blocksHtml = (slide.blocks || [])
+    .map((b) => {
+      const itemsHtml = b.items
+        ? `<ul class="pdf-list" style="margin-top:0.35rem;margin-bottom:0.85rem;">
+            ${b.items
+          .map(
+            (it) =>
+              `<li style="margin-bottom:0.4rem;"><strong>${escapeHtml(it.lead)}</strong> ${escapeHtml(it.text)}</li>`
+          )
+          .join("")}
+          </ul>`
+        : "";
+      const textHtml = b.text
+        ? `<p class="pdf-paragraph" style="margin-bottom:0.85rem;">${escapeHtml(b.text)}</p>`
+        : "";
+      return `
+        <div style="margin-bottom:0.9rem;">
+          <h3 class="pdf-subsection-title" style="font-size:1.12rem;margin-bottom:0.35rem;color:var(--pdf-navy);">
+            ${escapeHtml(b.heading)}
+          </h3>
+          ${textHtml}
+          ${itemsHtml}
+        </div>
+      `;
+    })
+    .join("");
+
+  return `
+    <div>
+      <h2 class="pdf-section-title" style="text-align:center;margin-bottom:1.1rem;">${escapeHtml(slide.sectionTitle)}</h2>
+      <div class="gamer-profile-3col">
+        <!-- Costado Izquierdo: Imagen de la mujer -->
+        <div class="gamer-profile-side-img-wrap">
+          <img src="${escapeHtml(slide.leftImage)}" alt="Mujer Gamer" class="gamer-profile-side-img" />
+        </div>
+
+        <!-- Centro: Contenido textual -->
+        <div class="gamer-profile-center-text">
+          ${blocksHtml}
+        </div>
+
+        <!-- Costado Derecho: Imagen del hombre -->
+        <div class="gamer-profile-side-img-wrap">
+          <img src="${escapeHtml(slide.rightImage)}" alt="Hombre Gamer" class="gamer-profile-side-img" />
+        </div>
+      </div>
+      ${showNextButton
+      ? `<div style="margin-top: 1.25rem; display: flex; justify-content: flex-end;">
+            <button type="button" class="btn btn-primary" style="padding: 0.75rem 1.5rem;" onclick="changeSlide(1)">
+              Siguiente →
+            </button>
+          </div>`
+      : ""
+    }
+    </div>
+  `;
+}
+
 function renderPresenterInteractiveBlock(slide, isPresenter = true) {
   const inter = slide.interaction;
   const slideResponses = Object.values(APP_STATE.room.responses?.[slide.id] || {});
@@ -2221,7 +2496,6 @@ function renderPresenterInteractiveBlock(slide, isPresenter = true) {
 
   return `
     <div class="interactive-block">
-      ${isPresenter ? renderSurveyTimerWidget(slide.id) : ""}
       <div class="interactive-header">
         <div style="display:flex;align-items:center;gap:0.6rem;">
           <span class="interactive-type-tag">${escapeHtml(inter.badge)}</span>
@@ -2714,6 +2988,32 @@ function renderParticipantMobileView() {
   const rawSlideIndex = APP_STATE.room.currentSlide || 0;
   const canControl = !APP_STATE.isQrGuest;
 
+  // Si el presentador reinició la sala, expulsar a los participantes conectados y exigirles volver a escanear el código QR
+  if (!canControl && APP_STATE.kickedByReset) {
+    container.innerHTML = `
+      <div class="participant-wrapper">
+        <div class="mobile-card">
+          <div class="mobile-header">
+            <div>
+              <div style="font-weight:800;font-size:1rem;">Subcultura Gamer en el NEA</div>
+              <div style="font-size:0.76rem;opacity:0.85;">Instituto Superior Carmen Molina de Llano</div>
+            </div>
+            <span class="mobile-user-score">Sala Reiniciada</span>
+          </div>
+          <div class="mobile-body" style="text-align:center;padding:2rem 1.25rem;">
+            <div style="font-size:2.6rem;margin-bottom:0.6rem;">🔄</div>
+            <h3 style="color:var(--pdf-navy);margin-bottom:0.5rem;">La sala fue reiniciada en cero</h3>
+            <p style="font-size:0.92rem;color:var(--pdf-text-muted);margin-bottom:1.25rem;line-height:1.5;">
+              El presentador reinició todos los datos de la presentación y eliminó los participantes anteriores.<br/>
+              <strong>Para volver a participar, escaneá nuevamente el código QR proyectado en la pantalla principal.</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+    `;
+    return;
+  }
+
   // Si un participante en celular escaneó el QR y aún no ingresó su nombre en esta sesión, mostrar siempre el registro primero;
   // una vez registrado con su nombre, pasa automáticamente a la Diapositiva 1 (Portada Institucional).
   if (!canControl && !APP_STATE.participantUser) {
@@ -2825,41 +3125,46 @@ function renderParticipantMobileView() {
     return;
   }
 
-  // Si estamos en la Diapositiva 1 (Portada Institucional), mostrarla reflejada también en la vista Participante
+  // Si estamos en la Diapositiva 1 (Portada Institucional), mostrar únicamente la imagen de presentación llegando hasta el borde del botón Menú
   if (slide.type === "cover-institutional") {
-    const rowsHtml = slide.institution.table
-      .map(
-        ([label, val]) => `
-        <tr>
-          <th>${escapeHtml(label)}</th>
-          <td>${escapeHtml(val)}</td>
-        </tr>`
-      )
-      .join("");
-
+    const wrapperMaxWidth = canControl ? "min(1100px, calc(100vw - 245px))" : "96vw";
     container.innerHTML = `
-      <div class="participant-wrapper" style="max-width: 780px;">
-        <div class="pdf-sheet" style="min-height: auto; padding: 2rem 1.75rem;">
-          <div class="pdf-cover-header">
-            <h1>${escapeHtml(slide.institution.title)}</h1>
-            <h2>${escapeHtml(slide.institution.subtitle)}</h2>
-            <p class="pdf-subtitle">${escapeHtml(slide.institution.topic)}</p>
-          </div>
-
-          <div style="max-width: 720px; margin: 0 auto; width: 100%;">
-            <table class="pdf-meta-table">
-              <tbody>
-                ${rowsHtml}
-              </tbody>
-            </table>
-            ${canControl
-        ? `<div style="margin-top: 1.25rem;">
-                    <button class="btn btn-primary" style="padding: 0.7rem 1.35rem; font-size: 0.95rem;" onclick="changeSlide(1)">
-                      Siguiente →
-                    </button>
-                  </div>`
+      <div class="participant-wrapper" style="max-width: ${wrapperMaxWidth}; width: 100%; margin: 0 auto; padding: 0;">
+        <div style="position:relative;width:100%;height:91vh;min-height:620px;margin:0 auto;border-radius:18px;overflow:hidden;background:#08071a;box-shadow:0 18px 42px rgba(15,23,42,0.55);display:flex;align-items:flex-end;justify-content:center;">
+          <img
+            src="portada_slide1.jpg"
+            alt="Portada Subcultura Gamer en el NEA"
+            style="position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block;pointer-events:none;"
+          />
+          ${canControl
+        ? `<div style="position:relative;z-index:2;padding:1.5rem;">
+                <button class="btn btn-primary" style="padding:0.85rem 1.9rem;font-size:1.05rem;font-weight:800;box-shadow:0 8px 24px rgba(0,0,0,0.75);border:2px solid rgba(255,255,255,0.35);" onclick="changeSlide(1)">
+                  Comenzar Presentación →
+                </button>
+              </div>`
         : ""
       }
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  // Si estamos en la Diapositiva 2 (Perfil Gamer: mujer a un costado, texto en el medio, hombre al otro costado)
+  if (slide.type === "gamer-profile") {
+    const user = APP_STATE.participantUser || { id: "guest", name: "Participante", score: 0 };
+    container.innerHTML = `
+      <div class="participant-wrapper wide-split">
+        <div class="mobile-card">
+          <div class="mobile-header">
+            <div>
+              <div style="font-weight:800;font-size:0.98rem;">👤 ${escapeHtml(user.name)}</div>
+              <div style="font-size:0.74rem;opacity:0.85;">Sincronizado en vivo · Diapositiva ${slide.number}/${SLIDES_DATA[SLIDES_DATA.length - 1].number}</div>
+            </div>
+            <span class="mobile-user-score">⭐ ${user.score || 0} pts</span>
+          </div>
+          <div class="mobile-body" style="padding: 1.5rem;">
+            ${renderGamerProfileThreeColBlock(slide, canControl)}
           </div>
         </div>
       </div>
@@ -3481,7 +3786,8 @@ function triggerSlide2RetroSurvey() {
   APP_STATE.slide2SurveyOpened = true;
   APP_STATE.slide2SurveyAnimating = true;
   APP_STATE.room.openedSurveys = ensurePlainObject(APP_STATE.room.openedSurveys);
-  APP_STATE.room.openedSurveys["slide-2"] = getEstimatedServerNow();
+  APP_STATE.room.openedSurveys["slide-2"] = Date.now();
+  startLocalSurveyTimer("slide-2", SURVEY_TIMER_DURATION_SEC * 1000);
   APP_STATE.room.slideSeq = nextSlideSeq();
   APP_STATE.lastLocalSlideChangeAt = Date.now();
   playRetroArcadeSound();
@@ -3528,7 +3834,8 @@ function triggerSlide4NextLevelSurvey(slideId = "slide-3") {
   APP_STATE.openedSurveys[slideId] = true;
   APP_STATE.openedSurveys[slideId + "_anim"] = true;
   APP_STATE.room.openedSurveys = ensurePlainObject(APP_STATE.room.openedSurveys);
-  APP_STATE.room.openedSurveys[slideId] = getEstimatedServerNow();
+  APP_STATE.room.openedSurveys[slideId] = Date.now();
+  startLocalSurveyTimer(slideId, SURVEY_TIMER_DURATION_SEC * 1000);
   APP_STATE.room.slideSeq = nextSlideSeq();
   APP_STATE.lastLocalSlideChangeAt = Date.now();
   playNextLevelSound();
@@ -3596,7 +3903,8 @@ function triggerSlide5FlipCoinsSurvey(slideId = "slide-4") {
   APP_STATE.openedSurveys[slideId] = true;
   APP_STATE.openedSurveys[slideId + "_anim"] = true;
   APP_STATE.room.openedSurveys = ensurePlainObject(APP_STATE.room.openedSurveys);
-  APP_STATE.room.openedSurveys[slideId] = getEstimatedServerNow();
+  APP_STATE.room.openedSurveys[slideId] = Date.now();
+  startLocalSurveyTimer(slideId, SURVEY_TIMER_DURATION_SEC * 1000);
   APP_STATE.room.slideSeq = nextSlideSeq();
   APP_STATE.lastLocalSlideChangeAt = Date.now();
   playCoinsBurstSound();
@@ -3653,7 +3961,8 @@ function triggerSlide13Modern3dSurvey(slideId = "slide-7") {
   APP_STATE.openedSurveys[slideId] = true;
   APP_STATE.openedSurveys[slideId + "_anim"] = true;
   APP_STATE.room.openedSurveys = ensurePlainObject(APP_STATE.room.openedSurveys);
-  APP_STATE.room.openedSurveys[slideId] = getEstimatedServerNow();
+  APP_STATE.room.openedSurveys[slideId] = Date.now();
+  startLocalSurveyTimer(slideId, SURVEY_TIMER_DURATION_SEC * 1000);
   APP_STATE.room.slideSeq = nextSlideSeq();
   APP_STATE.lastLocalSlideChangeAt = Date.now();
   playModern3dGameSound();
@@ -3739,7 +4048,8 @@ function triggerSlide14Orbital3dSurvey(slideId = "slide-8") {
   APP_STATE.openedSurveys[slideId] = true;
   APP_STATE.openedSurveys[slideId + "_anim"] = true;
   APP_STATE.room.openedSurveys = ensurePlainObject(APP_STATE.room.openedSurveys);
-  APP_STATE.room.openedSurveys[slideId] = getEstimatedServerNow();
+  APP_STATE.room.openedSurveys[slideId] = Date.now();
+  startLocalSurveyTimer(slideId, SURVEY_TIMER_DURATION_SEC * 1000);
   APP_STATE.room.slideSeq = nextSlideSeq();
   APP_STATE.lastLocalSlideChangeAt = Date.now();
   playModern3dOrbitalDropSound();
@@ -3826,7 +4136,8 @@ function triggerSlide8PokeballSurvey(slideId = "slide-5") {
   APP_STATE.openedSurveys[slideId] = true;
   APP_STATE.openedSurveys[slideId + "_anim"] = true;
   APP_STATE.room.openedSurveys = ensurePlainObject(APP_STATE.room.openedSurveys);
-  APP_STATE.room.openedSurveys[slideId] = getEstimatedServerNow();
+  APP_STATE.room.openedSurveys[slideId] = Date.now();
+  startLocalSurveyTimer(slideId, SURVEY_TIMER_DURATION_SEC * 1000);
   APP_STATE.room.slideSeq = nextSlideSeq();
   APP_STATE.lastLocalSlideChangeAt = Date.now();
   playPokeball3dSound();
